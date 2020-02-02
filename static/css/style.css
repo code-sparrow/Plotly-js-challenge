@@ -1,0 +1,89 @@
+.jumbotron {
+    background-image: url("../images/background.PNG");
+    background-size: cover;
+    border-color:rgb(228, 201, 169);
+    border-style: solid;
+    border-width: 5px;
+}
+
+body {
+    background-color: rgb(187, 167, 140);
+}
+#text_outline {
+    color:antiquewhite;
+    text-shadow:-1.5px -1.5px 0 rgb(38, 40, 82), 1.5px -1.5px 0 rgb(38, 40, 82),-1.5px 1.5px 0 rgb(38, 40, 82),1.5px 1.5px 0 rgb(38, 40, 82);
+}
+
+.well {
+    background-color: rgb(190, 190, 216);
+    padding: 8px;
+}
+
+.panel-body {
+    background-color: rgb(190, 190, 216);
+    padding: 8px;
+    overflow: auto;
+
+}
+
+.text-change {
+    font-size: 15px; 
+    font-family: Arial;
+    color: midnightblue;
+}
+
+.border-change {
+    border-color:rgb(228, 201, 169);
+    border-style: solid;
+    border-width: 4px;
+    border-radius: 8px;
+    padding: 0%;   
+}
+
+.jumbotron h1 {
+    margin-top: 20px;
+    font-size: 0.1rem;
+    animation: title 1.2s forwards linear;
+    animation: smaller-title 1.2s forwards linear;
+}
+
+.jumbotron p {
+    font-size: 2rem;
+    opacity: 0;
+    animation: subtitle 1.2s forwards linear;
+    animation-delay: 1.2s;
+}
+
+
+/* keyframe animations which will be used to animate the title */
+@keyframes title {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        font-size: 7.5rem;
+        opacity: 1;
+    }
+}
+
+@keyframes smaller-title {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        font-size: 5.5rem;
+        opacity: 1;
+    }
+}
+
+@keyframes subtitle {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
