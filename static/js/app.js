@@ -82,7 +82,7 @@ let plotBubble = function(subjectID, data) {
 
     let subjectData = data.samples.filter(subject => subject.id === subjectID)[0];
 
-    //const desired_maximum_marker_size = 100;
+    const desired_maximum_marker_size = 80;
     // Was trying to get a better bubble size to match the plot provided by trilogy
     // but ended up going with default for now
 
@@ -93,9 +93,9 @@ let plotBubble = function(subjectID, data) {
         marker: {
             size: subjectData.sample_values,
             color: subjectData.otu_ids,
-            colorscale: 'Blackbody'
-            //sizeref: 2.0 * subjectData.sample_values[0] / (desired_maximum_marker_size**2),
-            //sizemode: 'area'
+            colorscale: 'Blackbody',
+            sizeref: 2.0 * subjectData.sample_values[0] / (desired_maximum_marker_size**2),
+            sizemode: 'area'
         },
         text: subjectData.otu_labels,
         bgcolor: "lavender"
@@ -157,7 +157,7 @@ let plotGauge = function(subjectID, data) {
     };
 
     let trace2 = {
-        domain: { x: [-1, 1], y: [-0.375, 1.375] },
+        //domain: { x: [-1, 1], y: [-0.375, 1.375] },
         value: wFreq,
         title: { text: `<b>Belly Button Washing Frequency</b> <br> (scrubs per week) ` },
         type: "indicator",
@@ -184,10 +184,6 @@ let plotGauge = function(subjectID, data) {
                     thickness: 0.65,
                     value: wFreq},
             }
-            /*Ignore (couldnt find out correct syntax for text display in each step)
-            text: ["0-1", "1-2", "2-3", "3-4", "4-5", "5-6", "6-7", "7-8", "8-9", ""],
-            textinfo: 'text',
-            textposition:'inside'*/
             
     };
 
@@ -214,7 +210,7 @@ let plotGauge = function(subjectID, data) {
             ' Z';
 
     let layout = {
-        /*Ignore*/
+
         shapes:[{
             type: 'path',
             path: path,
@@ -223,27 +219,39 @@ let plotGauge = function(subjectID, data) {
                 color: '850000'
             }
         }],
-        xaxis: {
-            tickmode: 'array',
-            tickvals: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
-            ticktext: ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
-        },
+
         autosize: true,
         margin: { t: 75, b: 40, l: 40, r: 40 },
         plot_bgcolor: "rgb(190, 190, 216)",
         paper_bgcolor: "rgb(190, 190, 216)",
         font: { color: "darkblue", family: "Arial" }, 
 
-        xaxis: {zeroline:false, showticklabels:false,
-            showgrid: false, range: [-1, 1]},
-        yaxis: {zeroline:false, showticklabels:false,
-            showgrid: false, range: [-0.375, 1.375]}
+        xaxis: {
+            zeroline:false,
+            showticklabels:false,
+            showgrid: false, 
+            range: [-1, 1],
+
+        },
+
+        yaxis: {
+            zeroline:false,
+            showticklabels:false,
+            showgrid: false,
+            range: [-0.375, 1.375]}
+            /*
+            Had to offset range because origin for needle did not line up with origin for gauge,
+            or we we would want the needle to pivot rather.
+            Plot is responsive and it doesn't work as well with phone screens
+            Is there a way to dynamically offset range based on plot height?
+            */
 
         };
 
         let config = {responsive: true}
 
     Plotly.newPlot("gauge", traces, layout, config);
+    
 };
 
 
