@@ -105,7 +105,7 @@ let plotBubble = function(subjectID, data) {
     let layout = {
         xaxis:{title: "OTU ID"},
         autosize: true,
-        height: 700,
+        //height: 700,
         plot_bgcolor: "#A4DAD0",
         paper_bgcolor: "rgb(190, 190, 216)",
         font: { color: "darkblue", family: "Arial", size: 18}
@@ -144,30 +144,25 @@ let displayData = function(subjectID, data) {
 
 
 // function that filters data set based on a subject ID and plots a Gauge Chart
-
-/* Tried to get a working needle for the gauge, as in the suppled picture.
-    It became difficult to get the needle pointing to the correct point,
-    So I came to bypass and comment-out that portion of the code*/
-
 let plotGauge = function(subjectID, data) {
     let subjectData = data.metadata.filter(subject => subject.id == subjectID)[0];
     let wFreq = subjectData.wfreq;
 
     // Center circle for needle of gauge
-    /*Ignore
+    
     let trace1 = { type: 'scatter',
     x: [0], y:[0],
     marker: {size: 14, color:'850000'},
     showlegend: false
-    };*/
+    };
 
     let trace2 = {
-        domain: { x: [0, 1], y: [0, 1] },
+        domain: { x: [-1, 1], y: [-1,1] },
         value: wFreq,
         title: { text: `<b>Belly Button Washing Frequency</b> <br> (scrubs per week) ` },
         type: "indicator",
         
-        mode: "gauge+number",
+        mode: "gauge",
         gauge: { axis: { range: [null, 9], tickwidth: 2, tickcolor: "darkblue"},
                 bar: { color: "#133F8D", thickness: 0.35},
                 bgcolor: "lavender",
@@ -196,7 +191,7 @@ let plotGauge = function(subjectID, data) {
             
     };
 
-    /*Ignore
+    
     let traces = [trace1, trace2];
 
     //Defining coordinates to define an svg path for the gauge needle
@@ -212,14 +207,14 @@ let plotGauge = function(subjectID, data) {
     var bX = -0.025 * Math.cos((degrees-90) * Math.PI / 180);
     var bY = -0.025 * Math.sin((degrees-90) * Math.PI / 180);
     var cX = radius * Math.cos(radians);
-    var cY = radius * Math.sin(radians) - 0.13;
+    var cY = radius * Math.sin(radians);
     var path = 'M ' + aX + ' ' + aY +
             ' L ' + bX + ' ' + bY +
             ' L ' + cX + ' ' + cY +
-            ' Z';*/
+            ' Z';
 
     let layout = {
-        /*Ignore
+        /*Ignore*/
         shapes:[{
             type: 'path',
             path: path,
@@ -227,23 +222,27 @@ let plotGauge = function(subjectID, data) {
             line: {
                 color: '850000'
             }
-        }],*/
+        }],
+        xaxis: {
+            tickmode: 'array',
+            tickvals: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+            ticktext: ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
+        },
         autosize: true,
         margin: { t: 75, b: 40, l: 40, r: 40 },
         paper_bgcolor: "rgb(190, 190, 216)",
-        font: { color: "darkblue", family: "Arial" }   
+        font: { color: "darkblue", family: "Arial" }, 
 
-        /*Ignore
         xaxis: {zeroline:false, showticklabels:false,
             showgrid: false, range: [-1, 1]},
         yaxis: {zeroline:false, showticklabels:false,
-            showgrid: false, range: [-0.33, 1]}*/
+            showgrid: false, range: [-0.375, 1.375]}
 
         };
 
         let config = {responsive: true}
 
-    Plotly.newPlot("gauge", [trace2], layout, config);
+    Plotly.newPlot("gauge", traces, layout, config);
 };
 
 
