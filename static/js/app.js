@@ -157,7 +157,7 @@ let plotGauge = function(subjectID, data) {
     };
 
     let trace2 = {
-        domain: { x: [-1, 1], y: [-1,1] },
+        domain: { x: [-1, 1], y: [-0.375, 1.375] },
         value: wFreq,
         title: { text: `<b>Belly Button Washing Frequency</b> <br> (scrubs per week) ` },
         type: "indicator",
@@ -230,6 +230,7 @@ let plotGauge = function(subjectID, data) {
         },
         autosize: true,
         margin: { t: 75, b: 40, l: 40, r: 40 },
+        plot_bgcolor: "rgb(190, 190, 216)",
         paper_bgcolor: "rgb(190, 190, 216)",
         font: { color: "darkblue", family: "Arial" }, 
 
